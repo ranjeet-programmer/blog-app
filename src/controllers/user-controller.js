@@ -6,8 +6,11 @@ const create = async (req, res) => {
   try {
     const user = await userServices.create(req.body);
 
-    // console.log("In controller", user);
-
+    if (user.success === false) {
+      return res.status(201).json({
+        err: user.message,
+      });
+    }
     return res.status(201).json({
       message: "user is created successfully",
       success: true,

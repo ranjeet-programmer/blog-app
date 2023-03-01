@@ -24,6 +24,32 @@ const create = async (req, res) => {
   }
 };
 
+const signIn = async (req, res) => {
+  try {
+    const response = await userService.signIn(
+      req.body.email,
+      req.body.password
+    );
+
+    if (response) {
+      return res.status(200).json({
+        message: "Sign in successfully done",
+        success: true,
+        data: response,
+        err: {},
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Sign in failed",
+      success: false,
+      data: {},
+      err: error,
+    });
+  }
+};
+
 module.exports = {
   create,
+  signIn,
 };

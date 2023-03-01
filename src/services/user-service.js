@@ -8,29 +8,22 @@ class UserService {
   async create(data) {
     try {
       const user = await this.userRepository.create(data);
-
-      console.log("service layer : ", user);
-      // console.log("here in service layer", user);
-
-      if (user.success == false) {
-        return { message: "User already exists", success: false };
-      }
-
       return user;
     } catch (error) {
-      console.log("something went wrong at service layer");
-
+      console.error("An error occurred while creating the user.", error);
       throw error;
     }
   }
 
   async getByEmail(email) {
     try {
-      const user = this.userRepository.getByEmail(email);
+      const user = await this.userRepository.getByEmail(email);
       return user;
     } catch (error) {
-      console.log("something went wrong at service layer");
-
+      console.error(
+        `An error occurred while getting the user with email ${email}.`,
+        error
+      );
       throw error;
     }
   }

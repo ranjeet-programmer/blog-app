@@ -1,4 +1,4 @@
 .env
 node_modules/
-src/config/config.json
+src/config/database.js
 .DB_Store
